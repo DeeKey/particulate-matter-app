@@ -33,6 +33,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.room.Room
 import androidx.viewpager.widget.ViewPager
 import com.chillibits.pmapp.model.Sensor
 import com.chillibits.pmapp.network.ServerMessagingUtils
@@ -40,6 +41,7 @@ import com.chillibits.pmapp.network.handleServerInfo
 import com.chillibits.pmapp.network.loadServerInfo
 import com.chillibits.pmapp.service.SyncJobService
 import com.chillibits.pmapp.service.WebRealtimeSyncService
+import com.chillibits.pmapp.storage.AppDatabase
 import com.chillibits.pmapp.tool.*
 import com.chillibits.pmapp.ui.adapter.recyclerview.SensorAdapter
 import com.chillibits.pmapp.ui.adapter.viewpager.ViewPagerAdapterMain
@@ -72,6 +74,7 @@ class MainActivity : AppCompatActivity(), PlacesSearchDialog.PlaceSelectedCallba
     lateinit var pagerAdapter: ViewPagerAdapterMain
     private var prevMenuItem: MenuItem? = null
     private var searchItem: MenuItem? = null
+    private lateinit var db: AppDatabase
     //private val welcomeScreen = WelcomeHelper(this, WelcomeActivity::class.java)
 
     // Utils packages
@@ -98,6 +101,9 @@ class MainActivity : AppCompatActivity(), PlacesSearchDialog.PlaceSelectedCallba
         // Initialize toolbar
         toolbar.title = getString(R.string.app_name)
         setSupportActionBar(toolbar)
+
+        // Initialize local db
+        db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, Constants.DB_NAME).build()
 
         // Initialize util packages
         su = StorageUtils(this)

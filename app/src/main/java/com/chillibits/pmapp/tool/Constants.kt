@@ -45,4 +45,7 @@ object Constants {
     const val WIDGET_SMALL_EXTRA_SENSOR_ID = "WidgetSmallSensorID"
     const val WIDGET_EXTRA_LARGE_WIDGET_ID = "LargeWidgetID"
     const val WIDGET_EXTRA_SMALL_WIDGET_ID = "SmallWidgetID"
+
+    // Local db constants
+    const val DB_NAME = "pmapp-main"
 }
